@@ -84,8 +84,8 @@ Note.prototype.update = function (time) {
             }
         }
     }
-    if (this.x !== clamp(this.x, this.minX, this.maxX) ||
-        this.y !== clamp(this.y, this.minY, this.maxY) ||
+    if (this.x !== clamp(this.x, this.minX, window.innerWidth + this.s) ||
+        this.y !== clamp(this.y, this.minY, window.innerHeight + this.s) ||
         this.z !== clamp(this.z, this.minZ, this.maxZ * 2) ||
         this.o !== clamp(this.o, this.minO, this.maxO)) {
         this.reset();
@@ -123,8 +123,6 @@ Note.prototype.reset = function () {
     this.minO = 0;
     this.maxO = 100;
     this.minZ = 0;
-    this.maxX = window.innerWidth + this.s;
-    this.maxY = window.innerHeight + this.s;
     this.minR = -90;
     this.maxR = 40;
 };
