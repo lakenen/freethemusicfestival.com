@@ -88,8 +88,8 @@ Note.prototype.update = function (time) {
 };
 Note.prototype.render = function (time) {
     var n = this;
-    var transform = 'translate(' + (n.x - (n.s/2)) + 'px,' +( n.y - (n.s/2)) + 'px) scale(' + n.z + ') rotate(' + n.r + 'deg);';
     this.update(time);
+    var transform = 'translate(' + (n.x - (n.s/2)) + 'px,' +( n.y - (n.s/2)) + 'px) scale(' + n.z + ') rotate(' + n.r + 'deg);';
     this.img.setAttribute(
         'style',
         '-webkit-transform: ' + transform +
