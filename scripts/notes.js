@@ -52,16 +52,22 @@ function sign(x) {
     return x / Math.abs(x);
 }
 
+function getTime() {
+    return new Date().getTime();
+}
+
 var notes = [],
     transformProp = 'transform';
 
 function Note() {
+    this.t = getTime();
+    this.v = {};
+    this.a = {};
     this.reset();
     this.img = document.createElement('img');
     this.img.src = 'images/musicnotes.svg';
     this.img.width = this.s;
     this.img.height = this.s;
-    this.t = new Date().getTime();
 }
 
 Note.prototype.update = function (time) {
@@ -105,17 +111,13 @@ Note.prototype.reset = function () {
     this.z = Math.random() * this.maxZ;
     this.r = 0;
     this.o = 1;
-    this.v = {
-        x: rand(0.15, -0.5),
-        y: rand(0.15, -1),
-        z: rand(0.0001, -1),
-        r: rand(0.01, -0.5),
-        o: rand(0.0002, -1)
-    };
-    this.a = {
-        x: -0.000008,
-        y: -0.000004
-    };
+    this.v.x = rand(0.15, -0.5);
+    this.v.y = rand(0.15, -1);
+    this.v.z = rand(0.0001, -1);
+    this.v.r = rand(0.01, -0.5);
+    this.v.o = rand(0.0002, -1);
+    this.a.x = -0.000008;
+    this.a.y = -0.000004;
     this.minX = -this.s;
     this.minY = -this.s;
     this.minO = 0;
@@ -129,7 +131,7 @@ Note.prototype.reset = function () {
 
 function renderNotes() {
     var i, l,
-        now = new Date().getTime();
+        now = getTime();
 
     for (i = 0, l = notes.length; i < l; ++i) {
         notes[i].render(now);
@@ -138,17 +140,22 @@ function renderNotes() {
     raf(renderNotes);
 }
 
-function addNote() {
+function addNote(sel) {
     var note = new Note();
     notes.push(note);
-    document.querySelector('.notes').appendChild(note.img);
+    document.querySelector(sel).appendChild(note.img);
     return note;
 }
 
 renderNotes();
 
 window.onload = function () {
-    for (var i = 0; i < 15; ++i) {
-        setTimeout(addNote, i * 500 * Math.random() + 250);
+    function add(sel) {
+        return function () {
+            addNote(sel);
+        };
+    }
+    for (var i = 0; i < 16; ++i) {
+        setTimeout(add('.notes' + (i % 2 ? '.bg' : '.fg')), i * 500 * Math.random() + 250);
     }
 };
