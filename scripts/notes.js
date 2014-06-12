@@ -88,11 +88,12 @@ Note.prototype.update = function (time) {
 };
 Note.prototype.render = function (time) {
     var n = this;
-
+    var transform = 'translate(' + (n.x - (n.s/2)) + 'px,' +( n.y - (n.s/2)) + 'px) scale(' + n.z + ') rotate(' + n.r + 'deg);';
     this.update(time);
     this.img.setAttribute(
         'style',
-        '-webkit-transform: translate(' + (n.x - (n.s/2)) + 'px,' +( n.y - (n.s/2)) + 'px) scale(' + n.z + ') rotate(' + n.r + 'deg);' +
+        '-webkit-transform: ' + transform +
+        'transform: ' + transform +
         'opacity: ' + this.o
     );
 };
