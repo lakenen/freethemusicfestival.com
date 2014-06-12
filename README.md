@@ -1,6 +1,6 @@
 # freethemusicfestival.com
 
-The repo for [Free the Music Festival](freethemusicfestival.com).
+The repo for [Free the Music Festival](http://freethemusicfestival.com).
 
 ## License
 
