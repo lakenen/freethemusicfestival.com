@@ -65,7 +65,7 @@ function Note() {
     this.a = {};
     this.reset();
     this.img = document.createElement('img');
-    this.img.src = 'images/musicnotes.svg';
+    this.img.src = '/2014/images/musicnotes.svg';
     this.img.width = this.s;
     this.img.height = this.s;
 }
